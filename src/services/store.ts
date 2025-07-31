@@ -1,5 +1,9 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import { TypedUseSelectorHook, useDispatch as useAppDispatchHook, useSelector as useAppSelectorHook } from 'react-redux';
+import {
+  TypedUseSelectorHook,
+  useDispatch as dispatchHook,
+  useSelector as selectorHook
+} from 'react-redux';
 
 import { ingredientsReducer } from './slices/BurgerIngredient';
 import { constructorReducer } from './slices/BurgerConstructor';
@@ -23,5 +27,7 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof store.dispatch;
 
-export const useAppDispatch: () => AppDispatch = () => useAppDispatchHook();
-export const useAppSelector: TypedUseSelectorHook<RootState> = useAppSelectorHook;
+export const useDispatch: () => AppDispatch = () => dispatchHook();
+export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;
+
+export default store;

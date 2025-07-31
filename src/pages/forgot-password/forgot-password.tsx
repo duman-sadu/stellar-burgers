@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 
 import { sendResetEmail } from '../../services/slices/BurgerUser';
 import { ForgotPasswordUI } from '@ui-pages';
-import { useAppDispatch } from '../../services/store';
+import { useDispatch } from '../../services/store';
 
 export const ForgotPassword: FC = () => {
   const [email, setEmail] = useState('');
   const [error, setError] = useState<Error | null>(null);
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();

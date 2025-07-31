@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation, Navigate } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import { fetchUser } from '../../services/slices/BurgerUser';
 
 import { Preloader } from '../ui/preloader';
@@ -12,8 +12,8 @@ type TProps = {
 };
 
 export const ProtectedRoute = ({ onlyUnAuth = false, children }: TProps) => {
-  const { user, isAuthChecked } = useAppSelector((state) => state.user);
-  const dispatch = useAppDispatch();
+  const { user, isAuthChecked } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const location = useLocation();
 
   useEffect(() => {

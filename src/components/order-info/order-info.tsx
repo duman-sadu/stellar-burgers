@@ -3,13 +3,13 @@ import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import { fetchOrderByNumber } from '../../services/slices/BurgerOrder';
 
 export const OrderInfo: FC = () => {
-  const dispatch = useAppDispatch();
-  const { ingredients } = useAppSelector((state) => state.ingredients);
-  const orderData = useAppSelector((state) => state.order.currentOrder); 
+  const dispatch = useDispatch();
+  const { ingredients } = useSelector((state) => state.ingredients);
+  const orderData = useSelector((state) => state.order.currentOrder); 
   const number = Number(useParams().number);
 
   useEffect(() => {

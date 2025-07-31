@@ -1,12 +1,12 @@
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import { updateProfile, fetchUserOrders } from '../../services/slices/BurgerUser';
 
 export const Profile: FC = () => {
   /** TODO: взять переменную из стора */
-  const dispatch = useAppDispatch();
-  const { user } = useAppSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(fetchUserOrders());

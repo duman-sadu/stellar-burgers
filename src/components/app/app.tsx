@@ -24,14 +24,14 @@ import {
 } from '../../components';
 
 import { ProtectedRoute } from '../protected-route/protected-route';
-import { useAppDispatch } from '../../services/store';
+import { useDispatch } from '../../services/store';
 import { fetchUser } from '../../services/slices/BurgerUser';
 import { fetchIngredientList } from '../../services/slices/BurgerIngredient';
 
 const App = () => {
   const location = useLocation();
   const goBack = useNavigate();
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const modalBg = location.state?.background;
 

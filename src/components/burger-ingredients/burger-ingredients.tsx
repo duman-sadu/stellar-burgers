@@ -3,11 +3,11 @@ import { useInView } from 'react-intersection-observer';
 
 import { TIngredient, TTabMode } from '@utils-types';
 import { BurgerIngredientsUI } from '../ui/burger-ingredients';
-import { useAppSelector } from '../../services/store';
+import { useSelector } from '../../services/store';
 
 export const BurgerIngredients: FC = () => {
   /** TODO: взять переменные из стора */
-  const { ingredients } = useAppSelector((state) => state.ingredients);
+  const { ingredients } = useSelector((state) => state.ingredients);
 
   const buns: TIngredient[] = ingredients?.filter(
     (ingredient) => ingredient.type === 'bun'

@@ -1,17 +1,17 @@
 import { FC, useEffect, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
-import { useAppDispatch, useAppSelector } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import { useNavigate } from 'react-router-dom';
 import { submitOrder, resetOrderState } from '../../services/slices/BurgerOrder';
 import { resetConstructor } from '../../services/slices/BurgerConstructor';
 
 export const BurgerConstructor: FC = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { bun, ingredients } = useAppSelector((state) => state.burgerConstructor);
-  const { currentOrder, isSubmitting } = useAppSelector((state) => state.order);
-  const { user } = useAppSelector((state) => state.user);
+  const { bun, ingredients } = useSelector((state) => state.burgerConstructor);
+  const { currentOrder, isSubmitting } = useSelector((state) => state.order);
+  const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(resetOrderState());
