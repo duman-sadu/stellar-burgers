@@ -1,11 +1,11 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch as useAppDispatchHook, useSelector as useAppSelectorHook } from 'react-redux';
 
-import { ingredientsReducer } from './slices/IngredientsSlice';
-import { constructorReducer } from './slices/constructorSlice';
-import { orderReducer } from './slices/orderSlice';
-import { feedReducer } from './slices/feedSlice';
-import { userReducer } from './slices/userSlice';
+import { ingredientsReducer } from './slices/BurgerIngredient';
+import { constructorReducer } from './slices/BurgerConstructor';
+import { orderReducer } from './slices/BurgerOrder';
+import { feedReducer } from './slices/BurgerFeed';
+import { userReducer } from './slices/BurgerUser';
 
 const rootReducer = combineReducers({
   ingredients: ingredientsReducer,

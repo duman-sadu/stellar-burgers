@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useLocation, Navigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../services/store';
-import { fetchUser } from '../../services/slices/userSlice';
+import { fetchUser } from '../../services/slices/BurgerUser';
 
 import { Preloader } from '../ui/preloader';
 

@@ -60,15 +60,7 @@ type TIngredientsResponse = TServerResponse<{
   data: TIngredient[];
 }>;
 
-type TFeedsResponse = TServerResponse<{
-  orders: TOrder[];
-  total: number;
-  totalToday: number;
-}>;
-
-type TOrdersResponse = TServerResponse<{
-  data: TOrder[];
-}>;
+type TFeedsResponse = TServerResponse<TOrdersData>;
 
 export const getIngredientsApi = () =>
   fetch(`${URL}/ingredients`)

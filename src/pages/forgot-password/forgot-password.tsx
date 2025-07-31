@@ -1,7 +1,7 @@
 import { FC, useState, SyntheticEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { sendResetEmail } from '../../services/slices/userSlice';
+import { sendResetEmail } from '../../services/slices/BurgerUser';
 import { ForgotPasswordUI } from '@ui-pages';
 import { useAppDispatch } from '../../services/store';
 

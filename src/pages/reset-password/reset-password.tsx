@@ -2,7 +2,7 @@ import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../services/store';
-import { resetPassword } from '../../services/slices/userSlice';
+import { resetPassword } from '../../services/slices/BurgerUser';
 import { ResetPasswordUI } from '@ui-pages';
 
 export const ResetPassword: FC = () => {

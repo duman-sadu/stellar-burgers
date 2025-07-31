@@ -25,8 +25,8 @@ import {
 
 import { ProtectedRoute } from '../protected-route/protected-route';
 import { useAppDispatch } from '../../services/store';
-import { fetchUser } from '../../services/slices/userSlice';
-import { fetchIngredientList } from '../../services/slices/IngredientsSlice';
+import { fetchUser } from '../../services/slices/BurgerUser';
+import { fetchIngredientList } from '../../services/slices/BurgerIngredient';
 
 const App = () => {
   const location = useLocation();

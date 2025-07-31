@@ -3,7 +3,7 @@ import { FeedUI } from '@ui-pages';
 import { TOrder } from '@utils-types';
 import { FC, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../services/store';
-import { fetchFeedData } from '../../services/slices/feedSlice';
+import { fetchFeedData } from '../../services/slices/BurgerFeed';
 
 export const Feed: FC = () => {
   /** TODO: взять переменную из стора */
