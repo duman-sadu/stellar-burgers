@@ -1,0 +1,44 @@
+[
+    {
+    "_id": "60d3b41abdacab0026a733c6",
+    "name": "Флюоресцентная булка R2-D3",
+    "type": "bun",
+    "price": 988,
+    "image": "https://code.s3.yandex.net/react/code/bun-01.png"
+    },
+    {
+    "_id": "60d3b41abdacab0026a733c7",
+    "name": "Краторная булка N-200i",
+    "type": "bun",
+    "price": 1255,
+    "image": "https://code.s3.yandex.net/react/code/bun-02.png"
+    },
+    {
+    "_id": "60d3b41abdacab0026a733cc",
+    "name": "Плоды Фалленианского дерева",
+    "type": "main",
+    "price": 874,
+    "image": "https://code.s3.yandex.net/react/code/sp_1.png"
+    },
+    {
+    "_id": "60d3b41abdacab0026a733ce",
+    "name": "Мясо бессмертных моллюсков Protostomia",
+    "type": "main",
+    "price": 1337,
+    "image": "https://code.s3.yandex.net/react/code/meat-02.png"
+    },
+    {
+    "_id": "60d3b41abdacab0026a733cf",
+    "name": "Говяжий метеорит (отбивная)",
+    "type": "main",
+    "price": 3000,
+    "image": "https://code.s3.yandex.net/react/code/meat-04.png"
+    },
+    {
+    "_id": "60d3b41abdacab0026a733d0",
+    "name": "Соус Spicy-X",
+    "type": "sauce",
+    "price": 90,
+    "image": "https://code.s3.yandex.net/react/code/sauce-02.png"
+    }
+]
