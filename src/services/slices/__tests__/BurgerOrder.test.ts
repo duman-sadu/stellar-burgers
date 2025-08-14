@@ -1,5 +1,5 @@
 import { orderReducer, resetOrderState, submitOrder, fetchOrderByNumber } from '../BurgerOrder';
-import { TOrder } from '@utils-types';
+import { TOrder } from '../../../utils/types';
 
 describe('BurgerOrder slice', () => {
   const initialState = {

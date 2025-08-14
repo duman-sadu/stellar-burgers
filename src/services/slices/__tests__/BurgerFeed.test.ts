@@ -1,6 +1,6 @@
 import { feedReducer, fetchFeedData } from '../BurgerFeed';
 import { getFeedsApi } from '@api';
-import { TOrder } from '@utils-types';
+import { TOrder } from '../../../utils/types';
 
 // Мокаем API
 jest.mock('@api', () => ({

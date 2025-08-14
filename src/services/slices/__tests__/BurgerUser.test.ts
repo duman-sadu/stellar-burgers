@@ -1,5 +1,5 @@
 import { userReducer, setAuthChecked, setUser, login, logout, fetchUserOrders } from '../BurgerUser';
-import { TUser, TOrder } from '@utils-types';
+import { TUser, TOrder } from '../../../utils/types';
 
 describe('BurgerUser slice', () => {
   const initialState = {

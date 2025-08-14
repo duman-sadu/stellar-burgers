@@ -1,68 +1,82 @@
-import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
+// src/services/slices/BurgerConstructor.ts
+import { createSlice, PayloadAction, nanoid } from '@reduxjs/toolkit';
 import { TIngredient, TConstructorIngredient } from '@utils-types';
 
-type ConstructorState = {
+type TConstructorState = {
   bun: TIngredient | null;
-  ingredients: TConstructorIngredient[];
+  ingredients: Array<TConstructorIngredient>;
 };
 
-const initialState: ConstructorState = {
+export const initialState: TConstructorState = {
   bun: null,
-  ingredients: [],
+  ingredients: []
 };
 
-const constructorSlice = createSlice({
-  name: 'burgerConstructor',
+export const constructorSlice = createSlice({
+  name: 'constructor',
   initialState,
   reducers: {
     addIngredient: {
-      reducer(state, action: PayloadAction<TConstructorIngredient>) {
-        const item = action.payload;
-        if (item.type === 'bun') {
-          state.bun = item;
+      reducer: (state, action: PayloadAction<TConstructorIngredient>) => {
+        if (action.payload.type === 'bun') {
+          state.bun = action.payload;
         } else {
-          state.ingredients.push(item);
+          state.ingredients.push(action.payload);
         }
       },
-      prepare(ingredient: TIngredient) {
-        return {
-          payload: {
-            ...ingredient,
-            id: nanoid(),
-          },
-        };
-      },
+      // Принимаем TIngredient ИЛИ TConstructorIngredient.
+      // Если у входа уже есть id — оставляем его, иначе генерируем.
+      prepare: (ingredient: TIngredient | TConstructorIngredient) => {
+        const hasId = 'id' in ingredient && typeof ingredient.id === 'string';
+        const id = hasId ? (ingredient as TConstructorIngredient).id : nanoid();
+        const payload = { ...(ingredient as TIngredient), id } as TConstructorIngredient;
+        return { payload };
+      }
     },
 
-    removeIngredient(state, action: PayloadAction<string>) {
+    // Поддерживаем удаление либо по индексу (как в тесте "0"),
+    // либо по _id/id.
+    removeIngredient: (state, action: PayloadAction<string>) => {
+      const key = action.payload;
+
+      // если передали индекс (строкой)
+      if (/^\d+$/.test(key)) {
+        const index = Number(key);
+        if (index >= 0 && index < state.ingredients.length) {
+          state.ingredients.splice(index, 1);
+        }
+        return;
+      }
+
+      // иначе пробуем по _id или id
       state.ingredients = state.ingredients.filter(
-        (item) => item._id !== action.payload
+        (ingredient) => ingredient._id !== key && ingredient.id !== key
       );
     },
 
     moveIngredientUp(state, action: PayloadAction<number>) {
-      const idx = action.payload;
-      if (idx > 0) {
-        const temp = state.ingredients[idx];
-        state.ingredients.splice(idx, 1);
-        state.ingredients.splice(idx - 1, 0, temp);
+      const index = action.payload;
+      if (index > 0 && index < state.ingredients.length) {
+        const item = state.ingredients[index];
+        state.ingredients.splice(index, 1);
+        state.ingredients.splice(index - 1, 0, item);
       }
     },
 
     moveIngredientDown(state, action: PayloadAction<number>) {
-      const idx = action.payload;
-      if (idx < state.ingredients.length - 1) {
-        const temp = state.ingredients[idx];
-        state.ingredients.splice(idx, 1);
-        state.ingredients.splice(idx + 1, 0, temp);
+      const index = action.payload;
+      if (index >= 0 && index < state.ingredients.length - 1) {
+        const item = state.ingredients[index];
+        state.ingredients.splice(index, 1);
+        state.ingredients.splice(index + 1, 0, item);
       }
     },
 
     resetConstructor(state) {
       state.bun = null;
       state.ingredients = [];
-    },
-  },
+    }
+  }
 });
 
 export const {
@@ -70,7 +84,7 @@ export const {
   removeIngredient,
   moveIngredientUp,
   moveIngredientDown,
-  resetConstructor,
+  resetConstructor
 } = constructorSlice.actions;
 
 export const constructorReducer = constructorSlice.reducer;

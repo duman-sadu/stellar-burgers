@@ -1,18 +1,12 @@
 {
-    "success": true,
-    "name": "Space бургер",
-    "order": {
-    "_id": "66aefb3b4c5f8f001e3a4c20",
-    "ingredients": [
-        "60d3b41abdacab0026a733c6",
-        "60d3b41abdacab0026a733cc",
-        "60d3b41abdacab0026a733ce",
-        "60d3b41abdacab0026a733c6"
-    ],
+  "success": true,
+  "order": {
+    "id": "1",
     "status": "done",
-    "name": "Space бургер",
-    "createdAt": "2025-08-12T10:30:00.000Z",
-    "updatedAt": "2025-08-12T10:35:00.000Z",
-    "number": 12345
-    }
+    "name": "Бургер 1",
+    "createdAt": "2024",
+    "updatedAt": "2024",
+    "number": 101,
+    "ingredients": "['ingredient1', 'ingredient2']"
+  }
 }

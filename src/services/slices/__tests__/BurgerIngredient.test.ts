@@ -1,5 +1,5 @@
 import { ingredientsReducer, fetchIngredientList } from '../BurgerIngredient';
-import { TIngredient } from '@utils-types';
+import { TIngredient } from '../../../utils/types';
 
 describe('BurgerIngredient (ingredients) slice', () => {
   const initialState = {
