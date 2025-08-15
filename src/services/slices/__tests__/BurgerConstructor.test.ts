@@ -57,12 +57,19 @@ describe('BurgerConstructor slice', () => {
 
   it('должен удалить ингредиент', () => {
     const stateWithIngredient = { ...initialState, ingredients: [ingredient] };
-    const newState = constructorReducer(stateWithIngredient, removeIngredient("0"));
+    const newState = constructorReducer(
+      stateWithIngredient,
+      removeIngredient('0')
+    );
     expect(newState.ingredients).toHaveLength(0);
   });
 
   it('должен переместить ингредиент вверх', () => {
-    const ing2: TConstructorIngredient = { ...ingredient, id: 'ing2', _id: 'ing2' };
+    const ing2: TConstructorIngredient = {
+      ...ingredient,
+      id: 'ing2',
+      _id: 'ing2'
+    };
     const stateWithTwo = { ...initialState, ingredients: [ingredient, ing2] };
     const newState = constructorReducer(stateWithTwo, moveIngredientUp(1));
     expect(newState.ingredients[0].id).toBe('ing2');
@@ -70,7 +77,11 @@ describe('BurgerConstructor slice', () => {
   });
 
   it('должен переместить ингредиент вниз', () => {
-    const ing2: TConstructorIngredient = { ...ingredient, id: 'ing2', _id: 'ing2' };
+    const ing2: TConstructorIngredient = {
+      ...ingredient,
+      id: 'ing2',
+      _id: 'ing2'
+    };
     const stateWithTwo = { ...initialState, ingredients: [ingredient, ing2] };
     const newState = constructorReducer(stateWithTwo, moveIngredientDown(0));
     expect(newState.ingredients[0].id).toBe('ing2');

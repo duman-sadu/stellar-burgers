@@ -9,7 +9,7 @@ import { fetchOrderByNumber } from '../../services/slices/BurgerOrder';
 export const OrderInfo: FC = () => {
   const dispatch = useDispatch();
   const { ingredients } = useSelector((state) => state.ingredients);
-  const orderData = useSelector((state) => state.order.currentOrder); 
+  const orderData = useSelector((state) => state.order.currentOrder);
   const number = Number(useParams().number);
 
   useEffect(() => {

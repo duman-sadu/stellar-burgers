@@ -29,7 +29,10 @@ export const constructorSlice = createSlice({
       prepare: (ingredient: TIngredient | TConstructorIngredient) => {
         const hasId = 'id' in ingredient && typeof ingredient.id === 'string';
         const id = hasId ? (ingredient as TConstructorIngredient).id : nanoid();
-        const payload = { ...(ingredient as TIngredient), id } as TConstructorIngredient;
+        const payload = {
+          ...(ingredient as TIngredient),
+          id
+        } as TConstructorIngredient;
         return { payload };
       }
     },

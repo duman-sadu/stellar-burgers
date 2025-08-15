@@ -23,7 +23,7 @@ const initialState: OrderState = {
   currentOrder: null,
   isSubmitting: false,
   isLoading: false,
-  errorMessage: null,
+  errorMessage: null
 };
 
 const orderStoreSlice = createSlice({
@@ -35,7 +35,7 @@ const orderStoreSlice = createSlice({
       state.isSubmitting = false;
       state.isLoading = false;
       state.errorMessage = null;
-    },
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -67,7 +67,7 @@ const orderStoreSlice = createSlice({
         state.isLoading = false;
         state.currentOrder = action.payload?.orders?.[0] ?? null;
       });
-  },
+  }
 });
 
 export const { resetOrderState } = orderStoreSlice.actions;

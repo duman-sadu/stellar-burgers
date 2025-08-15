@@ -1,21 +1,13 @@
-import { feedReducer, fetchFeedData } from '../BurgerFeed';
+import { feedReducer, fetchFeedData, initialState } from '../BurgerFeed';
 import { getFeedsApi } from '@api';
 import { TOrder } from '../../../utils/types';
 
 // Мокаем API
 jest.mock('@api', () => ({
-  getFeedsApi: jest.fn(),
+  getFeedsApi: jest.fn()
 }));
 
 const mockedGetFeedsApi = getFeedsApi as jest.MockedFunction<typeof getFeedsApi>;
-
-const initialState = {
-  items: [] as TOrder[],
-  totalCount: 0,
-  todayCount: 0,
-  isLoading: false,
-  errorMessage: null as string | null,
-};
 
 describe('BurgerFeed slice', () => {
   it('возвращает initial state', () => {
@@ -23,7 +15,9 @@ describe('BurgerFeed slice', () => {
   });
 
   it('pending ставит isLoading = true и очищает errorMessage', () => {
-    const state = feedReducer(initialState, { type: fetchFeedData.pending.type });
+    const state = feedReducer(initialState, {
+      type: fetchFeedData.pending.type
+    });
     expect(state.isLoading).toBe(true);
     expect(state.errorMessage).toBeNull();
   });
@@ -32,12 +26,23 @@ describe('BurgerFeed slice', () => {
     const payload = {
       success: true,
       orders: [
-        { _id: '1', name: 'Заказ 1', status: 'done', ingredients: [], createdAt: '', updatedAt: '', number: 1 },
-      ],
+        {
+          _id: '1',
+          name: 'Заказ 1',
+          status: 'done',
+          ingredients: [],
+          createdAt: '',
+          updatedAt: '',
+          number: 1
+        }
+      ] as TOrder[],
       total: 10,
-      totalToday: 3,
+      totalToday: 3
     };
-    const state = feedReducer(initialState, { type: fetchFeedData.fulfilled.type, payload });
+    const state = feedReducer(initialState, {
+      type: fetchFeedData.fulfilled.type,
+      payload
+    });
     expect(state.items).toEqual(payload.orders);
     expect(state.totalCount).toBe(10);
     expect(state.todayCount).toBe(3);
@@ -46,7 +51,10 @@ describe('BurgerFeed slice', () => {
 
   it('rejected устанавливает errorMessage', () => {
     const error = { message: 'Ошибка сети' };
-    const state = feedReducer(initialState, { type: fetchFeedData.rejected.type, error });
+    const state = feedReducer(initialState, {
+      type: fetchFeedData.rejected.type,
+      error
+    });
     expect(state.isLoading).toBe(false);
     expect(state.errorMessage).toBe('Ошибка сети');
   });
@@ -57,16 +65,30 @@ describe('BurgerFeed slice', () => {
 
     mockedGetFeedsApi.mockResolvedValueOnce({
       success: true,
-      orders: [{ _id: '2', name: 'Заказ 2', status: 'pending', ingredients: [], createdAt: '', updatedAt: '', number: 2 }],
+      orders: [
+        {
+          _id: '2',
+          name: 'Заказ 2',
+          status: 'pending',
+          ingredients: [],
+          createdAt: '',
+          updatedAt: '',
+          number: 2
+        }
+      ] as TOrder[],
       total: 5,
-      totalToday: 1,
+      totalToday: 1
     });
 
     const thunk = fetchFeedData();
     await thunk(dispatch, getState, undefined);
 
-    expect(dispatch).toHaveBeenCalledWith(expect.objectContaining({ type: fetchFeedData.pending.type }));
-    expect(dispatch).toHaveBeenCalledWith(expect.objectContaining({ type: fetchFeedData.fulfilled.type }));
+    expect(dispatch).toHaveBeenCalledWith(
+      expect.objectContaining({ type: fetchFeedData.pending.type })
+    );
+    expect(dispatch).toHaveBeenCalledWith(
+      expect.objectContaining({ type: fetchFeedData.fulfilled.type })
+    );
   });
 
   it('thunk: неуспешный fetchFeedData диспатчит pending и rejected', async () => {
@@ -78,7 +100,11 @@ describe('BurgerFeed slice', () => {
     const thunk = fetchFeedData();
     await thunk(dispatch, getState, undefined);
 
-    expect(dispatch).toHaveBeenCalledWith(expect.objectContaining({ type: fetchFeedData.pending.type }));
-    expect(dispatch).toHaveBeenCalledWith(expect.objectContaining({ type: fetchFeedData.rejected.type }));
+    expect(dispatch).toHaveBeenCalledWith(
+      expect.objectContaining({ type: fetchFeedData.pending.type })
+    );
+    expect(dispatch).toHaveBeenCalledWith(
+      expect.objectContaining({ type: fetchFeedData.rejected.type })
+    );
   });
 });

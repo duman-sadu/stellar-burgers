@@ -17,11 +17,11 @@ export const ModalUI: FC<TModalUIProps> = memo(
           )}
           <button
             className={styles.button}
-            type="button"
+            type='button'
             onClick={onClose}
-            aria-label="Закрыть"
+            aria-label='Закрыть'
           >
-            <CloseIcon type="primary" />
+            <CloseIcon type='primary' />
           </button>
         </div>
         <div className={styles.content}>{children}</div>

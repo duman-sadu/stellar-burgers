@@ -16,7 +16,7 @@ type IngredientsState = {
 const initialState: IngredientsState = {
   ingredients: [],
   isFetching: false,
-  fetchError: null,
+  fetchError: null
 };
 
 const ingredientsSlice = createSlice({
@@ -37,7 +37,7 @@ const ingredientsSlice = createSlice({
         state.isFetching = false;
         state.ingredients = action.payload;
       });
-  },
+  }
 });
 
 export const ingredientsReducer = ingredientsSlice.reducer;

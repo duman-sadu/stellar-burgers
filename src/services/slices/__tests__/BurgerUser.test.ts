@@ -1,4 +1,11 @@
-import { userReducer, setAuthChecked, setUser, login, logout, fetchUserOrders } from '../BurgerUser';
+import {
+  userReducer,
+  setAuthChecked,
+  setUser,
+  login,
+  logout,
+  fetchUserOrders
+} from '../BurgerUser';
 import { TUser, TOrder } from '../../../utils/types';
 
 describe('BurgerUser slice', () => {
@@ -7,12 +14,12 @@ describe('BurgerUser slice', () => {
     user: null,
     orders: [] as TOrder[],
     loading: false,
-    errorMessage: null as string | null,
+    errorMessage: null as string | null
   };
 
   const mockUser: TUser = {
     name: 'Test',
-    email: 'test@example.com',
+    email: 'test@example.com'
   } as unknown as TUser;
 
   it('возвращает initial state', () => {
@@ -36,14 +43,20 @@ describe('BurgerUser slice', () => {
   });
 
   it('login.fulfilled сохраняет user и отмечает isAuthChecked', () => {
-    const state = userReducer(initialState, { type: login.fulfilled.type, payload: mockUser });
+    const state = userReducer(initialState, {
+      type: login.fulfilled.type,
+      payload: mockUser
+    });
     expect(state.user).toEqual(mockUser);
     expect(state.loading).toBe(false);
     expect(state.isAuthChecked).toBe(true);
   });
 
   it('login.rejected записывает ошибку и отмечает isAuthChecked', () => {
-    const state = userReducer(initialState, { type: login.rejected.type, error: { message: 'Ошибка' } });
+    const state = userReducer(initialState, {
+      type: login.rejected.type,
+      error: { message: 'Ошибка' }
+    });
     expect(state.loading).toBe(false);
     expect(state.errorMessage).toBe('Ошибка');
     expect(state.isAuthChecked).toBe(true);
@@ -51,13 +64,18 @@ describe('BurgerUser slice', () => {
 
   it('logout.fulfilled очищает пользователя', () => {
     const stateWithUser = { ...initialState, user: mockUser };
-    const state = userReducer(stateWithUser as any, { type: logout.fulfilled.type });
+    const state = userReducer(stateWithUser as any, {
+      type: logout.fulfilled.type
+    });
     expect(state.user).toBeNull();
   });
 
   it('fetchUserOrders.fulfilled записывает orders', () => {
     const mockOrders = [{ _id: '1' }] as unknown as TOrder[];
-    const state = userReducer(initialState, { type: fetchUserOrders.fulfilled.type, payload: mockOrders });
+    const state = userReducer(initialState, {
+      type: fetchUserOrders.fulfilled.type,
+      payload: mockOrders
+    });
     expect(state.orders).toEqual(mockOrders);
     expect(state.loading).toBe(false);
   });

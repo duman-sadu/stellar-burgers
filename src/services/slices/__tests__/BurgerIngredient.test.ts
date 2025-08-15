@@ -5,7 +5,7 @@ describe('BurgerIngredient (ingredients) slice', () => {
   const initialState = {
     ingredients: [] as TIngredient[],
     isFetching: false,
-    fetchError: null as string | null,
+    fetchError: null as string | null
   };
 
   const mockIngredients: TIngredient[] = [
@@ -20,8 +20,8 @@ describe('BurgerIngredient (ingredients) slice', () => {
       price: 100,
       image: 'image.jpg',
       image_mobile: 'image_mobile.jpg',
-      image_large: 'image_large.jpg',
-    },
+      image_large: 'image_large.jpg'
+    }
   ];
 
   it('возвращает initial state', () => {
@@ -29,19 +29,27 @@ describe('BurgerIngredient (ingredients) slice', () => {
   });
 
   it('pending ставит isFetching = true и очищает fetchError', () => {
-    const state = ingredientsReducer(initialState, { type: fetchIngredientList.pending.type });
+    const state = ingredientsReducer(initialState, {
+      type: fetchIngredientList.pending.type
+    });
     expect(state.isFetching).toBe(true);
     expect(state.fetchError).toBeNull();
   });
 
   it('fulfilled записывает ingredients и сбрасывает isFetching', () => {
-    const state = ingredientsReducer(initialState, { type: fetchIngredientList.fulfilled.type, payload: mockIngredients });
+    const state = ingredientsReducer(initialState, {
+      type: fetchIngredientList.fulfilled.type,
+      payload: mockIngredients
+    });
     expect(state.ingredients).toEqual(mockIngredients);
     expect(state.isFetching).toBe(false);
   });
 
   it('rejected записывает ошибку и сбрасывает isFetching', () => {
-    const state = ingredientsReducer(initialState, { type: fetchIngredientList.rejected.type, error: { message: 'Ошибка' } });
+    const state = ingredientsReducer(initialState, {
+      type: fetchIngredientList.rejected.type,
+      error: { message: 'Ошибка' }
+    });
     expect(state.fetchError).toBe('Ошибка');
     expect(state.isFetching).toBe(false);
   });

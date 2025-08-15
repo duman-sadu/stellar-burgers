@@ -1,4 +1,9 @@
-import { orderReducer, resetOrderState, submitOrder, fetchOrderByNumber } from '../BurgerOrder';
+import {
+  orderReducer,
+  resetOrderState,
+  submitOrder,
+  fetchOrderByNumber
+} from '../BurgerOrder';
 import { TOrder } from '../../../utils/types';
 
 describe('BurgerOrder slice', () => {
@@ -6,7 +11,7 @@ describe('BurgerOrder slice', () => {
     currentOrder: null,
     isSubmitting: false,
     isLoading: false,
-    errorMessage: null,
+    errorMessage: null
   };
 
   const mockOrder: TOrder = {
@@ -16,7 +21,7 @@ describe('BurgerOrder slice', () => {
     createdAt: '2025-08-10',
     updatedAt: '2025-08-10',
     number: 1234,
-    ingredients: [],
+    ingredients: []
   };
 
   it('возвращает initial state', () => {
@@ -28,13 +33,17 @@ describe('BurgerOrder slice', () => {
       currentOrder: mockOrder,
       isSubmitting: true,
       isLoading: true,
-      errorMessage: 'Ошибка',
+      errorMessage: 'Ошибка'
     };
-    expect(orderReducer(stateWithData as any, resetOrderState())).toEqual(initialState);
+    expect(orderReducer(stateWithData as any, resetOrderState())).toEqual(
+      initialState
+    );
   });
 
   it('submitOrder.pending устанавливает isSubmitting и isLoading', () => {
-    const state = orderReducer(initialState, { type: submitOrder.pending.type });
+    const state = orderReducer(initialState, {
+      type: submitOrder.pending.type
+    });
     expect(state.isSubmitting).toBe(true);
     expect(state.isLoading).toBe(true);
     expect(state.errorMessage).toBeNull();
@@ -43,7 +52,7 @@ describe('BurgerOrder slice', () => {
   it('submitOrder.fulfilled записывает currentOrder', () => {
     const state = orderReducer(initialState, {
       type: submitOrder.fulfilled.type,
-      payload: { order: mockOrder },
+      payload: { order: mockOrder }
     });
     expect(state.currentOrder).toEqual(mockOrder);
     expect(state.isSubmitting).toBe(false);
@@ -51,26 +60,37 @@ describe('BurgerOrder slice', () => {
   });
 
   it('submitOrder.rejected записывает ошибку и сбрасывает флаги', () => {
-    const state = orderReducer(initialState, { type: submitOrder.rejected.type, error: { message: 'Ошибка создания заказа' } });
+    const state = orderReducer(initialState, {
+      type: submitOrder.rejected.type,
+      error: { message: 'Ошибка создания заказа' }
+    });
     expect(state.errorMessage).toBe('Ошибка создания заказа');
     expect(state.isSubmitting).toBe(false);
     expect(state.isLoading).toBe(false);
   });
 
   it('fetchOrderByNumber.pending ставит isLoading=true', () => {
-    const state = orderReducer(initialState, { type: fetchOrderByNumber.pending.type });
+    const state = orderReducer(initialState, {
+      type: fetchOrderByNumber.pending.type
+    });
     expect(state.isLoading).toBe(true);
     expect(state.errorMessage).toBeNull();
   });
 
   it('fetchOrderByNumber.fulfilled записывает currentOrder', () => {
-    const state = orderReducer(initialState, { type: fetchOrderByNumber.fulfilled.type, payload: { orders: [mockOrder] } });
+    const state = orderReducer(initialState, {
+      type: fetchOrderByNumber.fulfilled.type,
+      payload: { orders: [mockOrder] }
+    });
     expect(state.currentOrder).toEqual(mockOrder);
     expect(state.isLoading).toBe(false);
   });
 
   it('fetchOrderByNumber.rejected записывает ошибку', () => {
-    const state = orderReducer(initialState, { type: fetchOrderByNumber.rejected.type, error: { message: 'Заказ не найден' } });
+    const state = orderReducer(initialState, {
+      type: fetchOrderByNumber.rejected.type,
+      error: { message: 'Заказ не найден' }
+    });
     expect(state.errorMessage).toBe('Заказ не найден');
     expect(state.isLoading).toBe(false);
   });
