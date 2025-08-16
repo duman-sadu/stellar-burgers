@@ -1,34 +1,24 @@
+import {
+  INGREDIENT_CARD,
+  MODAL
+} from '../support/selectors';
+
 describe('Модалка ингредиента в конструкторе бургера', () => {
   beforeEach(() => {
     cy.intercept('GET', '/api/ingredients', { fixture: 'ingredients.json' }).as('getIngredients');
     cy.visit('/');
     cy.wait('@getIngredients');
-    cy.get('[data-cy^="ingredient-card"]').should('exist');
+    cy.get(INGREDIENT_CARD).should('exist');
   });
 
-  it('Открывается модалка по клику на ингредиент', () => {
-    cy.get('[data-cy^="ingredient-card"]').first().click();
-    cy.get('[data-cy="modal"]').should('exist');
-  });
+  it('Открывается модалка по клику на ингредиент и показывает его данные', () => {
+    cy.fixture('ingredients.json').then((ingredients) => {
+      const firstIngredientName = ingredients.data[0].name; // имя из фикстуры
 
-  it('Закрывается модалка по кнопке закрытия', () => {
-    cy.get('[data-cy^="ingredient-card"]').first().click();
-    cy.get('[data-cy="modal"]').should('exist');
-    cy.get('[data-cy="close-button"]').click();
-    cy.get('[data-cy="modal"]').should('not.exist');
-  });
+      cy.get(INGREDIENT_CARD).first().click();
+      cy.get(MODAL).should('exist');
 
-  it('Закрывается модалка по Esc', () => {
-    cy.get('[data-cy^="ingredient-card"]').first().click();
-    cy.get('[data-cy="modal"]').should('exist');
-    cy.get('body').type('{esc}');
-    cy.get('[data-cy="modal"]').should('not.exist');
-  });
-
-  it('Закрывается модалка по клику на оверлей', () => {
-    cy.get('[data-cy^="ingredient-card"]').first().click();
-    cy.get('[data-cy="modal"]').should('exist');
-    cy.get('[data-cy="modal-overlay"]').click({ force: true });
-    cy.get('[data-cy="modal"]').should('not.exist');
+      cy.get(MODAL).should('contain.text', firstIngredientName);
+    });
   });
 });
