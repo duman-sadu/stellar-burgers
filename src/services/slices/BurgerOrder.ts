@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { orderBurgerApi, getOrderByNumberApi } from '@api';
 import { TOrder } from '@utils-types';
 
+// Thunks
 export const submitOrder = createAsyncThunk(
   'orderStore/submit',
   async (ingredientIds: string[]) => await orderBurgerApi(ingredientIds)
@@ -12,6 +13,7 @@ export const fetchOrderByNumber = createAsyncThunk(
   async (number: number) => await getOrderByNumberApi(number)
 );
 
+// State type
 type OrderState = {
   currentOrder: TOrder | null;
   isSubmitting: boolean;
@@ -19,13 +21,15 @@ type OrderState = {
   errorMessage: string | null;
 };
 
-const initialState: OrderState = {
+// Initial state
+export const initialState: OrderState = {
   currentOrder: null,
   isSubmitting: false,
   isLoading: false,
-  errorMessage: null,
+  errorMessage: null
 };
 
+// Slice
 const orderStoreSlice = createSlice({
   name: 'orderStore',
   initialState,
@@ -35,10 +39,11 @@ const orderStoreSlice = createSlice({
       state.isSubmitting = false;
       state.isLoading = false;
       state.errorMessage = null;
-    },
+    }
   },
   extraReducers: (builder) => {
     builder
+      // Submit order
       .addCase(submitOrder.pending, (state) => {
         state.isSubmitting = true;
         state.isLoading = true;
@@ -54,7 +59,7 @@ const orderStoreSlice = createSlice({
         state.isLoading = false;
         state.currentOrder = action.payload.order;
       })
-
+      // Fetch order by number
       .addCase(fetchOrderByNumber.pending, (state) => {
         state.isLoading = true;
         state.errorMessage = null;
@@ -67,8 +72,9 @@ const orderStoreSlice = createSlice({
         state.isLoading = false;
         state.currentOrder = action.payload?.orders?.[0] ?? null;
       });
-  },
+  }
 });
 
+// Exports
 export const { resetOrderState } = orderStoreSlice.actions;
 export const orderReducer = orderStoreSlice.reducer;

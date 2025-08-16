@@ -9,7 +9,7 @@ import { fetchOrderByNumber } from '../../services/slices/BurgerOrder';
 export const OrderInfo: FC = () => {
   const dispatch = useDispatch();
   const { ingredients } = useSelector((state) => state.ingredients);
-  const orderData = useSelector((state) => state.order.currentOrder); 
+  const orderData = useSelector((state) => state.order.currentOrder);
   const number = Number(useParams().number);
 
   useEffect(() => {
@@ -58,8 +58,8 @@ export const OrderInfo: FC = () => {
   }, [orderData, ingredients]);
 
   if (!orderInfo) {
-    return <Preloader />;
+    return <Preloader data-cy='preloader' />;
   }
 
-  return <OrderInfoUI orderInfo={orderInfo} />;
+  return <OrderInfoUI orderInfo={orderInfo} data-cy='order-info' />;
 };

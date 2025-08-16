@@ -8,7 +8,7 @@ import {
   getOrdersApi,
   forgotPasswordApi,
   resetPasswordApi,
-  TRegisterData,
+  TRegisterData
 } from '@api';
 import { TUser, TOrder } from '@utils-types';
 import { setCookie, deleteCookie, getCookie } from '../../utils/cookie';
@@ -83,7 +83,7 @@ export const resetPassword = createAsyncThunk(
     await resetPasswordApi(data)
 );
 
-type UserState = {
+export type UserState = {
   isAuthChecked: boolean;
   user: TUser | null;
   orders: TOrder[];
@@ -91,12 +91,12 @@ type UserState = {
   errorMessage: string | null;
 };
 
-const initialState: UserState = {
+export const initialState: UserState = {
   isAuthChecked: false,
   user: null,
   orders: [],
   loading: false,
-  errorMessage: null,
+  errorMessage: null
 };
 
 const userSlice = createSlice({
@@ -108,7 +108,7 @@ const userSlice = createSlice({
     },
     setUser: (state, action) => {
       state.user = action.payload.user;
-    },
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -218,7 +218,7 @@ const userSlice = createSlice({
         state.user = action.payload;
         state.isAuthChecked = true;
       });
-  },
+  }
 });
 
 export const { setAuthChecked, setUser } = userSlice.actions;

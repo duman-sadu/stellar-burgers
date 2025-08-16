@@ -15,12 +15,12 @@ type FeedState = {
   errorMessage: string | null;
 };
 
-const initialState: FeedState = {
+export const initialState: FeedState = {
   items: [],
   totalCount: 0,
   todayCount: 0,
   isLoading: false,
-  errorMessage: null,
+  errorMessage: null
 };
 
 const liveFeedSlice = createSlice({
@@ -44,7 +44,7 @@ const liveFeedSlice = createSlice({
         state.todayCount = totalToday;
         state.isLoading = false;
       });
-  },
+  }
 });
 
 export const feedReducer = liveFeedSlice.reducer;

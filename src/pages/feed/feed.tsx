@@ -8,7 +8,9 @@ import { fetchFeedData } from '../../services/slices/BurgerFeed';
 export const Feed: FC = () => {
   /** TODO: взять переменную из стора */
   const dispatch = useDispatch();
-  const { items: orders, isLoading: loading } = useSelector((state) => state.feed);
+  const { items: orders, isLoading: loading } = useSelector(
+    (state) => state.feed
+  );
 
   useEffect(() => {
     dispatch(fetchFeedData());

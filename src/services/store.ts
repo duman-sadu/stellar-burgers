@@ -11,17 +11,17 @@ import { orderReducer } from './slices/BurgerOrder';
 import { feedReducer } from './slices/BurgerFeed';
 import { userReducer } from './slices/BurgerUser';
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
   burgerConstructor: constructorReducer,
   order: orderReducer,
   feed: feedReducer,
-  user: userReducer,
+  user: userReducer
 });
 
 export const store = configureStore({
   reducer: rootReducer,
-  devTools: process.env.NODE_ENV !== 'production',
+  devTools: process.env.NODE_ENV !== 'production'
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
