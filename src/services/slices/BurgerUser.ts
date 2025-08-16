@@ -83,7 +83,7 @@ export const resetPassword = createAsyncThunk(
     await resetPasswordApi(data)
 );
 
-type UserState = {
+export type UserState = {
   isAuthChecked: boolean;
   user: TUser | null;
   orders: TOrder[];
@@ -91,7 +91,7 @@ type UserState = {
   errorMessage: string | null;
 };
 
-const initialState: UserState = {
+export const initialState: UserState = {
   isAuthChecked: false,
   user: null,
   orders: [],

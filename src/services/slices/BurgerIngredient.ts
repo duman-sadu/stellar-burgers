@@ -13,7 +13,7 @@ type IngredientsState = {
   fetchError: string | null;
 };
 
-const initialState: IngredientsState = {
+export const initialState: IngredientsState = {
   ingredients: [],
   isFetching: false,
   fetchError: null

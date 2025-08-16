@@ -6,5 +6,5 @@ type TModalOverlayUIProps = {
 };
 
 export const ModalOverlayUI: FC<TModalOverlayUIProps> = ({ onClick }) => (
-  <div className={styles.overlay} onClick={onClick} />
+  <div className={styles.overlay} onClick={onClick} data-cy='modal-overlay' />
 );

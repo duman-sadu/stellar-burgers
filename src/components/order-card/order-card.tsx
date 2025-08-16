@@ -25,6 +25,7 @@ export const OrderCard: FC<OrderCardProps> = memo(({ order }) => {
       },
       []
     );
+
     const total = ingredientsInfo.reduce((acc, item) => acc + item.price, 0);
     const ingredientsToShow = ingredientsInfo.slice(0, maxIngredients);
 
@@ -52,6 +53,7 @@ export const OrderCard: FC<OrderCardProps> = memo(({ order }) => {
       orderInfo={orderInfo}
       maxIngredients={maxIngredients}
       locationState={{ background: location }}
+      data-cy='ingredient-card'
     />
   );
 });

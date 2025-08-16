@@ -1,5 +1,6 @@
 import {
   orderReducer,
+  initialState,
   resetOrderState,
   submitOrder,
   fetchOrderByNumber
@@ -7,13 +8,6 @@ import {
 import { TOrder } from '../../../utils/types';
 
 describe('BurgerOrder slice', () => {
-  const initialState = {
-    currentOrder: null,
-    isSubmitting: false,
-    isLoading: false,
-    errorMessage: null
-  };
-
   const mockOrder: TOrder = {
     _id: '1',
     status: 'done',
@@ -35,7 +29,7 @@ describe('BurgerOrder slice', () => {
       isLoading: true,
       errorMessage: 'Ошибка'
     };
-    expect(orderReducer(stateWithData as any, resetOrderState())).toEqual(
+    expect(orderReducer(stateWithData, resetOrderState())).toEqual(
       initialState
     );
   });

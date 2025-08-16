@@ -4,19 +4,12 @@ import {
   setUser,
   login,
   logout,
-  fetchUserOrders
+  fetchUserOrders,
+  initialState
 } from '../BurgerUser';
 import { TUser, TOrder } from '../../../utils/types';
 
 describe('BurgerUser slice', () => {
-  const initialState = {
-    isAuthChecked: false,
-    user: null,
-    orders: [] as TOrder[],
-    loading: false,
-    errorMessage: null as string | null
-  };
-
   const mockUser: TUser = {
     name: 'Test',
     email: 'test@example.com'
@@ -64,7 +57,7 @@ describe('BurgerUser slice', () => {
 
   it('logout.fulfilled очищает пользователя', () => {
     const stateWithUser = { ...initialState, user: mockUser };
-    const state = userReducer(stateWithUser as any, {
+    const state = userReducer(stateWithUser, {
       type: logout.fulfilled.type
     });
     expect(state.user).toBeNull();

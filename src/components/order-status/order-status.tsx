@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, HTMLAttributes } from 'react';
 import { OrderStatusProps } from './type';
 import { OrderStatusUI } from '@ui';
 
@@ -8,7 +8,9 @@ const statusText: { [key: string]: string } = {
   created: 'Создан'
 };
 
-export const OrderStatus: FC<OrderStatusProps> = ({ status }) => {
+type Props = OrderStatusProps & HTMLAttributes<HTMLDivElement>;
+
+export const OrderStatus: FC<Props> = ({ status, ...props }) => {
   let textStyle = '';
   switch (status) {
     case 'pending':
@@ -24,5 +26,7 @@ export const OrderStatus: FC<OrderStatusProps> = ({ status }) => {
       textStyle = '#F2F2F3';
   }
 
-  return <OrderStatusUI textStyle={textStyle} text={statusText[status]} />;
+  return (
+    <OrderStatusUI textStyle={textStyle} text={statusText[status]} {...props} />
+  );
 };

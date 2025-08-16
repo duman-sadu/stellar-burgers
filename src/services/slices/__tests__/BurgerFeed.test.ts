@@ -7,7 +7,9 @@ jest.mock('@api', () => ({
   getFeedsApi: jest.fn()
 }));
 
-const mockedGetFeedsApi = getFeedsApi as jest.MockedFunction<typeof getFeedsApi>;
+const mockedGetFeedsApi = getFeedsApi as jest.MockedFunction<
+  typeof getFeedsApi
+>;
 
 describe('BurgerFeed slice', () => {
   it('возвращает initial state', () => {
